@@ -127,10 +127,10 @@ function clearlist {
 function toggle {
     if [ ! -z $PLAYID ]; then 
         if [ $PLAYING = "0" ];then
-            kill -18 $PLAYID
+            kill -SIGCONT $PLAYID
             PLAYING="1"
         else 
-            kill -19 $PLAYID
+            kill -SIGSTOP $PLAYID
             PLAYING="0"
         fi
     fi
@@ -222,7 +222,7 @@ while true; do
             ;;
         pause)
             if [ $PLAYING = "1" ]; then
-                kill -19 $PLAYID
+                kill -SIGSTOP $PLAYID
                 PLAYING="0"
             fi
             ;;
